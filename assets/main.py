@@ -12,6 +12,7 @@ def generateword():
                     WORD_LIST.append(word.strip())
     except FileNotFoundError:
         print("[!] Error! File not Found.")
+    return word
 
 def replay():
     while True:
@@ -36,31 +37,26 @@ def main():
     while lives >= 0:
         temp = 0
         guess = input("please type in your guess: ")
-        response = ["Bascat" for i in range(len(target))]
-        print("current tries: " + str(lives))
-        if guess == target:
-            print("Correct: You Win")
-            break
-        else:
-            # for x in guess:
-            #     if x == guess[temp]:
-            #         print(str(guess[temp]) + " = Chophy")
-            #     elif guess[temp] in target:
-            #         print(str(guess[temp]) + " = Storts")
-            #     else:
-            #         print(str(guess[temp]) + " = B")
-            for g_digit in range(len(guess)):
-                for t_digit in range(len(target)):
-                    if guess[g_digit] == target[t_digit]:
-                        if g_digit == t_digit:
-                            response[g_digit] = str(guess[temp]) + " = Chophy"
-                        else:
-                            response[g_digit] = str(guess[temp]) + " = Storts"
-                        temp += 1
-            print(response)
+        response = ["Bacat" for i in range(len(target))]
+        if len(guess) == 5:
+            if guess == target:
+                print("Correct: You Win")
+                break
+            else:
+                print("current tries: " + str(lives))
+                for g_digit in range(len(guess)):
+                    for t_digit in range(len(target)):
+                        if guess[g_digit] == target[t_digit]:
+                            if g_digit == t_digit:
+                                response[g_digit] = str(guess[temp]) + " = Chophy"
+                            else:
+                                response[g_digit] = str(guess[temp]) + " = Storts"
+                            temp += 1
+                print(response)
             lives -= 1
+        else:
+            print("please enter a 5 letter word")
     replay()
-
 
 if __name__ == '__main__':
     main()
